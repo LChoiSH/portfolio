@@ -1,10 +1,19 @@
+const path = require("path");
 /** @type {import('next').NextConfig} */
+
+const isProduction = process.env.NODE_ENV === "production";
+const productURL = "https://lchoish.github.io/portfolio";
+
 const nextConfig = {
-  assetPrefix:
-      process.env.NODE_ENV === "production"
-          ? "https://LChoiSH.github.io/portfolio"
-          : "",
-  images: { unoptimized: true },
+  assetPrefix: isProduction ? productURL : "",
+  images: {
+    reactStrictMode: true,
+    assetPrefix: isProduction ? productURL : "",
+    trailingSlash: true,
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src')],
+  },
 };
 
 module.exports = nextConfig
